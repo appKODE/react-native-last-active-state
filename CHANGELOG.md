@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.4...v0.1.5) (2021-07-07)
+
+
+### Bug Fixes
+
+* **ios:** fix getting last time on start app ([26be1a5](https://git.appkode.ru/diary/diary_last_active_state/commit/26be1a52e9bde5cb00af2ef4e10ddf6029b1adff))
+
 ### [0.1.4](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.3...v0.1.4) (2021-07-07)
 
 
