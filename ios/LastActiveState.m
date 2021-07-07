@@ -75,13 +75,13 @@ RCT_EXPORT_METHOD(getLastActiveTime : (RCTResponseSenderBlock)callback)
   }
   
   if (![newState isEqualToString:_lastKnownState]) {
-     _lastKnownState = newState;
      if (self.bridge && [newState isEqualToString:@"active"]) {
        [self sendEventWithName:@"changeLastActiveTime"
                           body:[self getResult:_lastActiveTime]];
-     } else {
+     } else if([_lastKnownState isEqualToString:@"active"]) {
          [self saveLastActiveTime];
      }
+      _lastKnownState = newState;
    }
 }
 
