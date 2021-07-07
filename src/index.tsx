@@ -9,7 +9,8 @@ export type LastActiveStateEvent = { lastActiveTime: number };
 export type LastActiveStateEventHandle = (e: LastActiveStateEvent) => void;
 
 export type LastActiveStateType = {
-  getLastActiveTime: () => number;
+  getLastActiveTime: () => Promise<number>;
+  getLastActiveTimeSync: () => number;
   initialLastActiveTime: number;
   addListener: (handle: LastActiveStateEventHandle) => EmitterSubscription;
 };
@@ -39,5 +40,7 @@ export default {
     };
     return nativeEmitter.addListener('changeLastActiveTime', cb);
   },
-  getLastActiveTime: () => _lastActiveTime,
+  getLastActiveTimeSync: () => _lastActiveTime,
+  getLastActiveTime: () =>
+    new Promise((resolve) => LastActiveState.getLastActiveTime(resolve)),
 } as LastActiveStateType;

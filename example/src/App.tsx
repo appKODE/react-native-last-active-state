@@ -24,7 +24,7 @@ export default function App() {
         onPress={() =>
           Alert.alert(
             'Last active time',
-            String(LastActiveState.getLastActiveTime())
+            String(LastActiveState.getLastActiveTimeSync())
           )
         }
         title="Get last active time"
