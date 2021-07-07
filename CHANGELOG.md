@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.2...v0.1.3) (2021-07-07)
+
+
+### Bug Fixes
+
+* **android:** fix crash ([2c0a4b2](https://git.appkode.ru/diary/diary_last_active_state/commit/2c0a4b2b0b00d4bc590ac27c6bc6dfa343960e60))
+
 ### [0.1.2](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.1...v0.1.2) (2021-07-07)
 
 
