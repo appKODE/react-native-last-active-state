@@ -1,19 +1,106 @@
 #import "LastActiveState.h"
+#import <React/RCTUtils.h>
 
-@implementation LastActiveState
+static NSString *RCTCurrentAppState()
+{
+  static NSDictionary *states;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    states = @{@(UIApplicationStateActive) : @"active", @(UIApplicationStateBackground) : @"background"};
+  });
+
+  if (RCTRunningInAppExtension()) {
+    return @"extension";
+  }
+
+  return states[@(RCTSharedApplication().applicationState)] ?: @"unknown";
+}
+
+@implementation LastActiveState {
+    int _lastActiveTime;
+    NSString *_lastKnownState;
+}
 
 RCT_EXPORT_MODULE()
 
-// Example method
-// See // https://reactnative.dev/docs/native-modules-ios
-RCT_REMAP_METHOD(multiply,
-                 multiplyWithA:(nonnull NSNumber*)a withB:(nonnull NSNumber*)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
-{
-  NSNumber *result = @([a floatValue] * [b floatValue]);
+//RCT_EXPORT_METHOD(getLastActiveTime : (RCTResponseSenderBlock)callback)
+//{
+//  NSInteger result = [self getLastActiveTime];
+//  callback(@[ @(result) ]);
+//}
 
-  resolve(result);
+- (NSDictionary *)constantsToExport
+{
+ return @{ @"initialLastActiveTime": @([self getLastActiveTime]) };
+}
+
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[ @"changeLastActiveTime" ];
+}
+
+- (void)startObserving
+{
+  NSLog(@"Start observing");
+  for (NSString *name in @[
+         UIApplicationDidBecomeActiveNotification,
+         UIApplicationDidEnterBackgroundNotification,
+         UIApplicationDidFinishLaunchingNotification,
+         UIApplicationWillResignActiveNotification,
+         UIApplicationWillEnterForegroundNotification
+       ]) {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleAppStateDidChange:)
+                                                 name:name
+                                               object:nil];
+  }
+}
+
+- (void)stopObserving
+{
+  NSLog(@"stop observing");
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)handleAppStateDidChange:(NSNotification *)notification
+{
+  NSString *newState;
+
+  if ([notification.name isEqualToString:UIApplicationWillResignActiveNotification]) {
+    newState = @"inactive";
+    [self saveLastActiveTime];
+  } else if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
+    newState = @"background";
+    [self saveLastActiveTime];
+  } else {
+    newState = RCTCurrentAppState();
+  }
+  
+  if (![newState isEqualToString:_lastKnownState]) {
+     _lastKnownState = newState;
+     if (self.bridge && [newState isEqualToString:@"active"]) {
+       [self sendEventWithName:@"changeLastActiveTime"
+                          body:[self getResult:_lastActiveTime]];
+     }
+   }
+}
+
+- (NSInteger)getLastActiveTime
+{
+  return [[NSUserDefaults standardUserDefaults] integerForKey:@"lastActiveTime"];
+}
+
+- (id)getResult:(NSInteger)time
+{
+  return  @{@"lastActiveTime" : @(time)};
+}
+
+- (void)saveLastActiveTime
+{
+  int time = [[NSDate date] timeIntervalSince1970];
+  [[NSUserDefaults standardUserDefaults] setInteger:time
+                                            forKey:@"lastActiveTime"];
+  _lastActiveTime = time;
 }
 
 @end
