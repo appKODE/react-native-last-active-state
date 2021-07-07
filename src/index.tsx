@@ -4,14 +4,14 @@ import {
   EmitterSubscription,
 } from 'react-native';
 
-type EventData = { lastActiveTime: number };
+export type LastActiveStateEvent = { lastActiveTime: number };
 
-type EventHandle = (e: EventData) => void;
+export type LastActiveStateEventHandle = (e: LastActiveStateEvent) => void;
 
-type LastActiveStateType = {
+export type LastActiveStateType = {
   getLastActiveTime: () => number;
   initialLastActiveTime: number;
-  addListener: (handle: EventHandle) => EmitterSubscription;
+  addListener: (handle: LastActiveStateEventHandle) => EmitterSubscription;
 };
 
 const { LastActiveState } = NativeModules;
@@ -23,7 +23,7 @@ const nativeEmitter = new NativeEventEmitter(LastActiveState);
 
 let _lastActiveTime = initialLastActiveTime;
 
-function generalHandle(e: EventData) {
+function generalHandle(e: LastActiveStateEvent) {
   _lastActiveTime = e.lastActiveTime;
 }
 
@@ -32,8 +32,8 @@ nativeEmitter.addListener('changeLastActiveTime', generalHandle);
 export default {
   ...LastActiveState,
   initialLastActiveTime,
-  addListener: (handle: EventHandle) => {
-    const cb = (e: EventData) => {
+  addListener: (handle: LastActiveStateEventHandle) => {
+    const cb = (e: LastActiveStateEvent) => {
       handle(e);
       generalHandle(e);
     };
