@@ -1,6 +1,6 @@
 {
   "name": "react-native-last-active-state",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "getter last active state time",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
