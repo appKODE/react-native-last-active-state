@@ -67,7 +67,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
 
      @ReactMethod
      public void getLastActiveTime(Callback callBack) {
-       callBack.invoke(getLastActive());
+       callBack.invoke(getLastActive().doubleValue());
      }
 
     private void sendEvent(@Nullable WritableMap params) {

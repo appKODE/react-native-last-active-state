@@ -22,12 +22,21 @@ export default function App() {
       <Text>Last active time: {result}</Text>
       <Button
         onPress={() =>
+          LastActiveState.getLastActiveTime().then((result) => {
+            Alert.alert('Last active time', String(result));
+          })
+        }
+        title="Get last active time"
+      />
+
+      <Button
+        onPress={() =>
           Alert.alert(
             'Last active time',
             String(LastActiveState.getLastActiveTimeSync())
           )
         }
-        title="Get last active time"
+        title="Get last active time SYNC"
       />
     </View>
   );
