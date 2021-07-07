@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.1...v0.1.2) (2021-07-07)
+
+
+### Features
+
+* **api:** added async method for get last active time ([746355b](https://git.appkode.ru/diary/diary_last_active_state/commit/746355bf5151ddbf97ffde155115c96bc2c99e2c))
+
 ### 0.1.1 (2021-07-07)
 
 
