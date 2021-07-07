@@ -65,10 +65,10 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
     public void onHostDestroy() {
     }
 
-    // @ReactMethod
-    // public void getLastActiveTime(Callback callBack) {
-    //   callBack.invoke(getLastActive());
-    // }
+     @ReactMethod
+     public void getLastActiveTime(Callback callBack) {
+       callBack.invoke(getLastActive());
+     }
 
     private void sendEvent(@Nullable WritableMap params) {
       context

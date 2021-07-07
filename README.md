@@ -38,7 +38,7 @@ export default function App() {
                 onPress={() =>
                 Alert.alert(
                     'Last active time',
-                    String(LastActiveState.getLastActiveTime())
+                    String(LastActiveState.getLastActiveTimeSync())
                 )
                 }
                 title="Get last active time"
@@ -54,7 +54,8 @@ export default function App() {
 | method                   | description                                                      |
 | ------------------------ | ---------------------------------------------------------------- |
 | addListener              | Subscribing to data changes                                      |
-| getLastActiveTime        | Synchronous method for getting the time of the last active state |
+| getLastActiveTime        | Recommended method for getting the time of the last active state |
+| getLastActiveTimeSync    | Synchronous method for getting the time of the last active state |
 
 ## Types
 
@@ -65,7 +66,8 @@ type LastActiveStateEvent = { lastActiveTime: number };
 type LastActiveStateEventHandle = (e: LastActiveStateEvent) => void;
 
 type LastActiveStateType = {
-  getLastActiveTime: () => number;
+  getLastActiveTime: () => Promise<number>;
+  getLastActiveTimeSync: () => number;
   initialLastActiveTime: number;
   addListener: (handle: LastActiveStateEventHandle) => EmitterSubscription;
 };

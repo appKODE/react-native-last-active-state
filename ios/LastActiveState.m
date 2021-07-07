@@ -23,11 +23,11 @@ static NSString *RCTCurrentAppState()
 
 RCT_EXPORT_MODULE()
 
-//RCT_EXPORT_METHOD(getLastActiveTime : (RCTResponseSenderBlock)callback)
-//{
-//  NSInteger result = [self getLastActiveTime];
-//  callback(@[ @(result) ]);
-//}
+RCT_EXPORT_METHOD(getLastActiveTime : (RCTResponseSenderBlock)callback)
+{
+ NSInteger result = [self getLastActiveTime];
+ callback(@[ @(result) ]);
+}
 
 - (NSDictionary *)constantsToExport
 {
