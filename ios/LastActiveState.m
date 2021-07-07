@@ -68,10 +68,8 @@ RCT_EXPORT_METHOD(getLastActiveTime : (RCTResponseSenderBlock)callback)
 
   if ([notification.name isEqualToString:UIApplicationWillResignActiveNotification]) {
     newState = @"inactive";
-    [self saveLastActiveTime];
   } else if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
     newState = @"background";
-    [self saveLastActiveTime];
   } else {
     newState = RCTCurrentAppState();
   }
@@ -81,6 +79,8 @@ RCT_EXPORT_METHOD(getLastActiveTime : (RCTResponseSenderBlock)callback)
      if (self.bridge && [newState isEqualToString:@"active"]) {
        [self sendEventWithName:@"changeLastActiveTime"
                           body:[self getResult:_lastActiveTime]];
+     } else {
+         [self saveLastActiveTime];
      }
    }
 }

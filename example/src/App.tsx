@@ -19,6 +19,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text>now: {Date.now() / 1000}</Text>
       <Text>Last active time: {result}</Text>
       <Button
         onPress={() =>
