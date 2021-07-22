@@ -54,7 +54,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
 
     @Override
     public void onHostPause() {
-        SharedPreferences sharedPref = context.getCurrentActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences("lastActiveTime", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Long time = System.currentTimeMillis() / 1000;
         editor.putLong("lastActiveTime", time);
@@ -77,7 +77,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
     }
 
     private Long getLastActive() {
-      SharedPreferences sharedPref = context.getCurrentActivity().getPreferences(Context.MODE_PRIVATE);
+      SharedPreferences sharedPref = context.getSharedPreferences("lastActiveTime", Context.MODE_PRIVATE);
       return sharedPref.getLong("lastActiveTime", 0);
     }
 }
