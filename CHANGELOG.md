@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.5...v0.1.6) (2021-07-23)
+
+
+### Bug Fixes
+
+* changed getter of SharedPreferences ([69e7136](https://git.appkode.ru/diary/diary_last_active_state/commit/69e7136ed8a26e1e60243b9154c9ad37487d0bf2))
+
 ### [0.1.5](https://git.appkode.ru/diary/diary_last_active_state/compare/v0.1.4...v0.1.5) (2021-07-07)
 
 
