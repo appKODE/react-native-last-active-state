@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactMethod;
@@ -40,7 +38,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
 
     @Override
     public Map<String, Object> getConstants() {
-        final Map<String, Object> constants = new HashMap<>();
+        final Map<String, Object> constants = new HashMap<>(1);
         constants.put("initialLastActiveTime", getLastActive());
         return constants;
     }
@@ -48,7 +46,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
     @Override
     public void onHostResume() {
         WritableMap params = Arguments.createMap();
-        params.putDouble("lastActiveTime", getLastActive());
+        params.putDouble("lastActiveTime", getLastActive().doubleValue());
         sendEvent(params);
     }
 
@@ -63,6 +61,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
 
     @Override
     public void onHostDestroy() {
+      context.removeLifecycleEventListener(this);
     }
 
      @ReactMethod
@@ -70,7 +69,7 @@ public class LastActiveStateModule extends ReactContextBaseJavaModule implements
        callBack.invoke(getLastActive().doubleValue());
      }
 
-    private void sendEvent(@Nullable WritableMap params) {
+    private void sendEvent(WritableMap params) {
       context
         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
         .emit("changeLastActiveTime", params);
