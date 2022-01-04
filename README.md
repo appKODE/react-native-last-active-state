@@ -9,13 +9,13 @@ When an application is destroyed, it does not receive control, thus there is no 
 ## Installation
 
 ```sh
-yarn add git+https://git.appkode.ru/diary/diary_last_active_state
+yarn add @kode-frontend/react-native-last-active-state
 ```
 
 ## Usage
 
 ```js
-import LastActiveState from "react-native-last-active-state";
+import LastActiveState from "@kode-frontend/react-native-last-active-state";
 
 export default function App() {
     const [result, setResult] = React.useState<number | undefined>(
