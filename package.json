@@ -1,5 +1,5 @@
 {
-  "name": "react-native-last-active-state",
+  "name": "@kode-frontend/react-native-last-active-state",
   "version": "0.1.7",
   "description": "getter last active state time",
   "main": "lib/commonjs/index",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://git.appkode.ru/diary/diary_last_active_state",
-  "author": "@ca <ca@kode.ru> (https://git.appkode.ru/diary/diary_last_active_state)",
+  "repository": "https://github.com/appKODE/react-native-last-active-state",
+  "author": "frontend-team@kode.ru",
   "license": "MIT",
   "bugs": {
-    "url": "https://git.appkode.ru/diary/diary_last_active_state/issues"
+    "url": "https://github.com/appKODE/react-native-last-active-state/issues"
   },
-  "homepage": "https://git.appkode.ru/diary/diary_last_active_state#readme",
+  "homepage": "https://github.com/appKODE/react-native-last-active-state#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
