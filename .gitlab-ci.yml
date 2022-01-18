@@ -1,9 +1,6 @@
 before_script:
   - chmod +x ./scripts/update-version.sh
 
-services:
-  - docker:dind
-
 stages:
   - release
 
