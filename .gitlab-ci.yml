@@ -9,7 +9,7 @@ stages:
 
 release:
   stage: release
-  image: node:dubnium
+  image: node:16.13.2
   only:
     - /^release$/
   tags: [frontend]
