@@ -1,6 +1,6 @@
 # react-native-last-active-state
 
-The library determines the time of the last active state of the application
+The library determines the time of the last active state of the application.
 
 ## Motivation
 
