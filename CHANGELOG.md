@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/appKODE/react-native-last-active-state/compare/v0.1.9...v0.1.10) (2024-07-12)
+
+
+### Features
+
+* updated RN for example and build.gradle ([7661704](https://github.com/appKODE/react-native-last-active-state/commit/7661704e2dfafaf06c73be21b33dbe781d6cf0ff))
+
 ### [0.1.9](https://github.com/appKODE/react-native-last-active-state/compare/v0.1.8...v0.1.9) (2022-02-14)
 
 ### [0.1.8](https://github.com/appKODE/react-native-last-active-state/compare/v0.1.7...v0.1.8) (2022-01-18)
