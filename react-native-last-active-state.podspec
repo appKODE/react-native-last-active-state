@@ -10,10 +10,14 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = package["author"]
 
-  s.platforms    = { :ios => "10.0" }
+  s.platforms    = { :ios => "13.0" }
   s.source       = { :git => "https://git.appkode.ru/diary/diary_last_active_state.git", :tag => "#{s.version}" }
+  s.module_name  = "RNLastActiveState"
 
-  s.source_files = "ios/**/*.{h,m,mm}"
+  s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
+
+  load 'nitrogen/generated/ios/RNLastActiveState+autolinking.rb'
+  add_nitrogen_files(s)
 end
