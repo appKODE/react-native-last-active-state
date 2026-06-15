@@ -2,17 +2,32 @@
 
 The library determines the time of the last active state of the application.
 
-## Motivation
+## 🚀 Motivation
 
 When an application is destroyed, it does not receive control, thus there is no way to detect the time spent in an inactive state. This library remembers the time of the last active state, you can get it the next time you start the application.
 
-## Installation
+
+
+## 📋 Requirements
+
+| Requirement           | Version  |
+| --------------------- | -------- |
+| React Native          | ≥ 0.75   |
+| react-native-nitro-modules | ≥ 0.35 |
+| iOS                   | ≥ 15.1   |
+| Android minSdkVersion | ≥ 24     |
+
+> **Note:** This library uses [Nitro Modules](https://nitro.margelo.com/).
+
+## 📥 Installation
+
 
 ```sh
-yarn add @kode-frontend/react-native-last-active-state
+yarn add @kode-frontend/react-native-last-active-state react-native-nitro-modules
 ```
 
-## Usage
+
+## 🎮 Usage
 
 ```js
 import LastActiveState from "@kode-frontend/react-native-last-active-state";
@@ -49,7 +64,7 @@ export default function App() {
 
 ```
 
-## Available methods
+## 📦 Available methods
 
 | method                   | description                                                      |
 | ------------------------ | ---------------------------------------------------------------- |
