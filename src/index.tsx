@@ -1,46 +1,39 @@
-import {
-  NativeModules,
-  NativeEventEmitter,
-  EmitterSubscription,
-} from 'react-native';
+import { NitroModules } from 'react-native-nitro-modules';
+import type { LastActiveState as Spec } from './specs/LastActiveState.nitro';
 
 export type LastActiveStateEvent = { lastActiveTime: number };
 
 export type LastActiveStateEventHandle = (e: LastActiveStateEvent) => void;
 
+export type Subscription = { remove: () => void };
+
 export type LastActiveStateType = {
   getLastActiveTime: () => Promise<number>;
   getLastActiveTimeSync: () => number;
   initialLastActiveTime: number;
-  addListener: (handle: LastActiveStateEventHandle) => EmitterSubscription;
+  addListener: (handle: LastActiveStateEventHandle) => Subscription;
 };
 
-const { LastActiveState } = NativeModules;
+const NativeModule = NitroModules.createHybridObject<Spec>('LastActiveState');
 
-const initialLastActiveTime =
-  LastActiveState.getConstants().initialLastActiveTime;
+const listeners = new Set<LastActiveStateEventHandle>();
 
-const nativeEmitter = new NativeEventEmitter(LastActiveState);
+NativeModule.onLastActiveTimeChanged = (lastActiveTime: number) => {
+  listeners.forEach((listener) => listener({ lastActiveTime }));
+};
 
-let _lastActiveTime = initialLastActiveTime;
-
-function generalHandle(e: LastActiveStateEvent) {
-  _lastActiveTime = e.lastActiveTime;
-}
-
-nativeEmitter.addListener('changeLastActiveTime', generalHandle);
-
-export default {
-  ...LastActiveState,
-  initialLastActiveTime,
-  addListener: (handle: LastActiveStateEventHandle) => {
-    const cb = (e: LastActiveStateEvent) => {
-      handle(e);
-      generalHandle(e);
+const LastActiveState: LastActiveStateType = {
+  initialLastActiveTime: NativeModule.initialLastActiveTime,
+  getLastActiveTime: () => NativeModule.getLastActiveTime(),
+  getLastActiveTimeSync: () => NativeModule.getLastActiveTimeSync(),
+  addListener: (handle: LastActiveStateEventHandle): Subscription => {
+    listeners.add(handle);
+    return {
+      remove: () => {
+        listeners.delete(handle);
+      },
     };
-    return nativeEmitter.addListener('changeLastActiveTime', cb);
   },
-  getLastActiveTimeSync: () => _lastActiveTime,
-  getLastActiveTime: () =>
-    new Promise((resolve) => LastActiveState.getLastActiveTime(resolve)),
-} as LastActiveStateType;
+};
+
+export default LastActiveState;

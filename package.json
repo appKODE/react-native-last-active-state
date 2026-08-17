@@ -13,6 +13,8 @@
     "android",
     "ios",
     "cpp",
+    "nitrogen",
+    "nitro.json",
     "react-native-last-active-state.podspec",
     "!lib/typescript/example",
     "!android/build",
@@ -25,9 +27,10 @@
     "test": "jest",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "prepare": "bob build",
+    "codegen": "npx nitrogen",
+    "prepare": "yarn codegen && bob build",
     "release": "release-it",
-    "example": "yarn --cwd example",
+    "example": "yarn workspace react-native-last-active-state-example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods"
   },
@@ -59,18 +62,24 @@
     "eslint-plugin-prettier": "^3.1.3",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "nitrogen": "^0.35.9",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-builder-bob": "^0.18.1",
+    "react-native-nitro-modules": "^0.35.0",
     "release-it": "^14.2.2",
-    "typescript": "^4.1.3"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-nitro-modules": "*"
   },
+  "workspaces": [
+    "example"
+  ],
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
